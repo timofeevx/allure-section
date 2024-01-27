@@ -1,0 +1,1 @@
+WARNING  Allure Section:_allure_section.py:106 Caught exception: AssertionError here

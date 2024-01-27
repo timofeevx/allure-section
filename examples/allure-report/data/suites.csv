@@ -1,0 +1,7 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"broken","Sat Jan 27 22:40:43 GET 2024","Sat Jan 27 22:40:43 GET 2024","2","","test_allure_section","","","","test_few_sections",""
+"failed","Sat Jan 27 22:40:43 GET 2024","Sat Jan 27 22:40:43 GET 2024","2","","test_allure_section","","","","test_one_negative_error",""
+"broken","Sat Jan 27 22:40:43 GET 2024","Sat Jan 27 22:40:43 GET 2024","3","","test_allure_section","","","","test_few_negative_exceptions",""
+"broken","Sat Jan 27 22:40:43 GET 2024","Sat Jan 27 22:40:43 GET 2024","2","","test_allure_section","","","","test_one_negative_exception",""
+"failed","Sat Jan 27 22:40:43 GET 2024","Sat Jan 27 22:40:43 GET 2024","5","","test_allure_section","","","","test_few_negative_exceptions_and_errors",""
+"passed","Sat Jan 27 22:40:43 GET 2024","Sat Jan 27 22:40:43 GET 2024","1","","test_allure_section","","","","test_positive_section",""
