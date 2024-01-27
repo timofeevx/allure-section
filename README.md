@@ -20,6 +20,12 @@ The above code demonstrates the creation of a section named "Validate Electrical
 
 **Note**: Use this context manager only when you need to validate multiple steps within the same section. Avoid using it for running multiple steps that change conditions to prevent unexpected behavior.
 
+### Example Report
+
+You can view an example report generated using `allure_section` by following [this link](https://raw.githack.com/timofeevx/allure_section/develop/examples/allure-report/index.html).
+
+<br><br><br>
+
 ## Implementation Details
 
 ### Custom Exception Class
