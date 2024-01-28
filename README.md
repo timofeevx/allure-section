@@ -24,7 +24,7 @@ The above code demonstrates the creation of a section named "Validate Electrical
 
 You can view an example report generated using `allure_section` by following [this link](https://raw.githack.com/timofeevx/allure_section/develop/examples/allure-report/index.html).
 
-![allure-report.gif](examples/allure-report.gif)]
+[![allure-report.gif](examples/allure-report.gif)](https://raw.githack.com/timofeevx/allure_section/develop/examples/allure-report/index.html)
 
 <br><br><br>
 
