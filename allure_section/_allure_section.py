@@ -27,15 +27,11 @@ Example:
         Do not use it for run multiple steps that change condition to avoid unexpected behaviour.
 """
 
-import logging
-from contextlib import contextmanager
-
 import allure
 from allure_commons._core import plugin_manager
 from allure_commons.utils import uuid4
 
-
-logger = logging.getLogger("Allure Section")
+from contextlib import contextmanager
 
 
 class MultipleExceptions(Exception):
@@ -52,11 +48,25 @@ class MultipleExceptions(Exception):
         return f"Occurred.\n\nMultiple exceptions occurred:{exceptions}"
 
 
+class MultipleErrors(AssertionError):
+    """Custom ErrorExceptionClass for aggregate Section exceptions"""
+
+    def __init__(self, exceptions=None):
+        """Initialize MultipleErrors instance"""
+        self.exceptions = exceptions
+        super().__init__()
+
+    def __str__(self):
+        """Generate output for MultipleErrors message"""
+        exceptions = ''.join([f"\n{i}. {e.__class__.__name__}: {e}" for i, e in enumerate(self.exceptions, start=1)])
+        return f"Occurred.\n\nMultiple errors occurred:{exceptions}"
+
+
 class SectionContext:
     """Section Context for AllureSection"""
 
     def __init__(self, title):
-        """Create AllureSection instance
+        """Create Context instance for AllureSection
 
         Args:
             title: name of the section (It will be provided to the `allure.step`)
@@ -69,22 +79,25 @@ class SectionContext:
 
     def __enter__(self):
         """Enter to the section context"""
-        logger.info(f"Enter section <{self.title}>")
         plugin_manager.hook.start_step(uuid=self.uuid, title=self.title, params=self.params)
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         """Exit from the section context"""
-        logger.info(f"Exit from section <{self.title}>")
         if self._exceptions:
             if len(self._exceptions) == 1:
                 exception = self._exceptions[0]
                 exc_type = type(exception)
                 exc_val = exception
                 exc_tb = exception.__traceback__
+            elif self._exc_type in [type(e) for e in self._exceptions]:
+                exc_type = self._exc_type
+                exc_val = MultipleErrors(self._exceptions)
+                exc_tb = MultipleErrors(self._exceptions).__traceback__
             else:
-                exc_type = self._exc_type if self._exc_type in [type(e) for e in self._exceptions] else Exception
+                exc_type = Exception
                 exc_val = MultipleExceptions(self._exceptions)
+                exc_tb = MultipleExceptions(self._exceptions).__traceback__
 
         plugin_manager.hook.stop_step(uuid=self.uuid, title=self.title, exc_type=exc_type, exc_val=exc_val,
                                       exc_tb=exc_tb)
@@ -98,10 +111,8 @@ class SectionContext:
         Args:
             step_name: name of the step (It will be provided to the `allure.step`)
         """
-        logger.info(f"Executing step <{step_name}>")
         try:
             with allure.step(step_name):
                 yield
         except Exception as e:
-            logger.warning(f"Caught exception: {str(e)}")
             self._exceptions.append(e)

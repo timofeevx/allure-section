@@ -24,21 +24,19 @@ The above code demonstrates the creation of a section named "Validate Electrical
 
 You can view an example report generated using `allure_section` by following [this link](https://raw.githack.com/timofeevx/allure_section/develop/examples/allure-report/index.html).
 
+[![allure-report.gif](examples/allure-report.gif)](https://raw.githack.com/timofeevx/allure_section/develop/examples/allure-report/index.html)
+
 <br><br><br>
 
 ## Implementation Details
 
 ### Custom Exception Class
 
-This module includes a `MultipleExceptions` class, a custom exception type designed to aggregate section exceptions. It allows the user to identify and handle multiple exceptions collectively.
+This module includes a `MultipleExceptions` and a `MultipleErrors` classes, custom exception types designed to aggregate section exceptions. They allows the user to identify and handle multiple exceptions/errors collectively.
 
 ### Section Context Class
 
 The `SectionContext` class serves as the main context manager for the `allure_section`. It handles the entry and exit points of the section, logs relevant information, and manages exceptions. The `step` method is used to create individual steps within the section.
-
-### Logging
-
-The module utilizes the `logging` module to provide informative messages about entering and exiting sections, executing steps, and catching exceptions.
 
 ### Usage
 

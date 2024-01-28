@@ -1,3 +1,0 @@
-WARNING  Allure Section:_allure_section.py:106 Caught exception: AssertionError here
-WARNING  Allure Section:_allure_section.py:106 Caught exception: Failed exception here
-WARNING  Allure Section:_allure_section.py:106 Caught exception: ZeroDivisionError here
